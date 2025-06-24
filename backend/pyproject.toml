@@ -18,6 +18,10 @@ dependencies = [
     "langgraph-api",
     "fastapi",
     "google-genai",
+    "requests",
+    "tavily-python",
+    "langchain_community",
+    "dashscope",
 ]
 
 
