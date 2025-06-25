@@ -1,5 +1,5 @@
 import os
-from agent.tools_and_schemas import SearchQueryList, Reflection
+from src.agent.tools_and_schemas import SearchQueryList, Reflection
 from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.types import Send
@@ -7,14 +7,14 @@ from langgraph.graph import StateGraph
 from langgraph.graph import START, END
 from langchain_core.runnables import RunnableConfig
 from langchain_community.chat_models import ChatTongyi
-from agent.state import (
+from src.agent.state import (
     OverallState,
     QueryGenerationState,
     ReflectionState,
     WebSearchState,
 )
-from agent.configuration import Configuration
-from agent.prompts import (
+from src.agent.configuration import Configuration
+from src.agent.prompts import (
     get_current_date,
     query_writer_instructions,
     web_searcher_instructions,
@@ -22,7 +22,7 @@ from agent.prompts import (
     answer_instructions,
 )
 
-from agent.utils import (
+from src.agent.utils import (
     get_citations,
     get_research_topic,
     insert_citation_markers,
@@ -130,8 +130,6 @@ def web_research(state: WebSearchState, config: RunnableConfig) -> OverallState:
     response = chat.invoke(messages)
     
     # 使用阿里云搜索API获取搜索结果
-    from .utils import resolve_urls, get_citations
-    
     # 获取搜索结果
     sources_gathered = resolve_urls([], state["search_query"])
     
